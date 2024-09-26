@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppConfig, DatabaseConfig } from './config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HealthModule } from './modules/health/health.module';
+import { UsersModule } from './modules/users/users.module';
+import { User } from './modules/users/entities/user.entity';
+import { Profile } from './modules/users/entities/profile.entity';
 
 @Module({
   imports: [
@@ -21,12 +24,13 @@ import { HealthModule } from './modules/health/health.module';
         username: configService.get<string>('database.user'),
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.name'),
-        entities: [],
+        entities: [User, Profile],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
     HealthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
