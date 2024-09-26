@@ -8,6 +8,7 @@ import { HealthModule } from './modules/health/health.module';
 import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/entities/user.entity';
 import { Profile } from './modules/users/entities/profile.entity';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -31,6 +32,9 @@ import { Profile } from './modules/users/entities/profile.entity';
     }),
     HealthModule,
     UsersModule,
+    RouterModule.register([
+      { path: 'api/v1', children: [{ path: 'users', module: UsersModule }] },
+    ]),
   ],
   controllers: [AppController],
   providers: [AppService],
