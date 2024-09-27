@@ -15,7 +15,7 @@ export class AwsService {
     });
   }
 
-  async sendMailBySES(email: string, subject: string) {
+  async sendMailBySES(email: string, subject: string, body: string) {
     try {
       const command = new SendEmailCommand({
         // 받는사람
@@ -33,7 +33,7 @@ export class AwsService {
           // 메일 본문
           Body: {
             Html: {
-              Data: `123`,
+              Data: body,
             },
           },
         },

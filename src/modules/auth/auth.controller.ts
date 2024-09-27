@@ -6,5 +6,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/send-mail')
-  sendMail(@Body('email') email: string) {}
+  sendMail(@Body('email') email: string) {
+    return this.authService.sendMail(email);
+  }
 }

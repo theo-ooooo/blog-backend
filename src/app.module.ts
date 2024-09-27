@@ -35,7 +35,13 @@ import { EmailAuth } from './modules/auth/entities/emailAuth.entity';
     HealthModule,
     UsersModule,
     RouterModule.register([
-      { path: 'api/v1', children: [{ path: 'users', module: UsersModule }] },
+      {
+        path: 'api/v1',
+        children: [
+          { path: 'users', module: UsersModule },
+          { path: 'auth', module: AuthModule },
+        ],
+      },
     ]),
     AuthModule,
   ],
