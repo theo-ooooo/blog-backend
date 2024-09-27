@@ -1,6 +1,8 @@
 export type AppConfig = {
   environment: string;
   port: number;
+  awsAccessKey: string;
+  awsPrivateKey: string;
 };
 
 export type DatabaseConfig = {

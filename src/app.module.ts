@@ -9,6 +9,8 @@ import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/entities/user.entity';
 import { Profile } from './modules/users/entities/profile.entity';
 import { RouterModule } from '@nestjs/core';
+import { AuthModule } from './modules/auth/auth.module';
+import { EmailAuth } from './modules/auth/entities/emailAuth.entity';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { RouterModule } from '@nestjs/core';
         username: configService.get<string>('database.user'),
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.name'),
-        entities: [User, Profile],
+        entities: [User, Profile, EmailAuth],
         synchronize: true,
       }),
       inject: [ConfigService],
@@ -35,6 +37,7 @@ import { RouterModule } from '@nestjs/core';
     RouterModule.register([
       { path: 'api/v1', children: [{ path: 'users', module: UsersModule }] },
     ]),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
